@@ -37,7 +37,7 @@
             --card-bg: #ffffff;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: __fkGrotesk_8a67e8, __fkGrotesk_Fallback_8a67e8, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
@@ -107,32 +107,19 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(32, 128, 141, 0.3);
         }
-        .plan, .highlight, .referral-program, .eric-info, .posts-container {
-            background: var(--card-bg);
-            padding: 30px;
-            margin-top: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .link-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
         }
-        .plan h3, .highlight h3, .referral-program h3, .eric-info h3, .posts-container h3 {
-            color: var(--primary-color);
-            margin-top: 0;
+        .link-text {
+            font-size: 0.9rem;
+            color: var(--text-color);
         }
-        .feature-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .feature-list li {
-            margin-bottom: 10px;
-            padding-left: 30px;
-            position: relative;
-        }
-        .feature-list li:before {
-            content: "\f00c";
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
+        .copy-icon {
+            cursor: pointer;
             color: var(--primary-color);
         }
         .eric-info {
@@ -228,6 +215,11 @@
                 <p><strong>Experience the future of internet research at a discounted price with Perplexity Pro!</strong></p>
             </div>
             <a href="https://perplexity.ai/pro?referral_code=324494JU" class="cta-button pulse">$10 off the first month of Perplexity Pro!</a>
+            <div class="link-container">
+                <span class="link-text">https://perplexity.ai/pro?referral_code=324494JU</span>
+                <i class="fas fa-copy copy-icon" onclick="copyLink()" title="Copy link"></i>
+            </div>
+            <p class="center-text"><small>Feel free to share this link with others who might be interested in Perplexity Pro!</small></p>
 
             <div class="eric-info">
                 <div class="eric-info-text">
@@ -241,7 +233,7 @@
             </div>
 
             <div class="posts-container">
-                <h3>Latest Posts from Eric on X</h3>
+                <h3>Perplexity AI Posts from Eric on X</h3>
                 <div class="tweets-container">
                     <div class="tweet-embed">
                         <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Love Perplexity AI so much. Thank you for this fantastic update <a href="https://twitter.com/AravSrinivas?ref_src=twsrc%5Etfw">@AravSrinivas</a> and the <a href="https://twitter.com/perplexity_ai?ref_src=twsrc%5Etfw">@perplexity_ai</a> team! <a href="https://t.co/IRtB7WAz1M">https://t.co/IRtB7WAz1M</a></p>&mdash; Eric Buess (@EricBuess) <a href="https://twitter.com/EricBuess/status/1808241736839307370?ref_src=twsrc%5Etfw">July 2, 2024</a></blockquote>
@@ -278,7 +270,6 @@
                 const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 setTheme(newTheme);
-                console.log('Theme toggled successfully to', newTheme);
             });
 
             // Set initial theme
@@ -289,9 +280,16 @@
             if (defaultDark) {
                 setTheme('dark');
             }
-
-            // console.log('Theme toggle functionality initialized');
         });
+
+        function copyLink() {
+            const linkText = document.querySelector('.link-text').textContent;
+            navigator.clipboard.writeText(linkText).then(() => {
+                alert('Link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
     </script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
