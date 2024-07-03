@@ -59,7 +59,7 @@ h1 {
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(32, 128, 141, 0.2);
   text-align: center;
-  max-width: 410px;
+  max-width: 420px;
 }
 
 .cta-button:hover {
