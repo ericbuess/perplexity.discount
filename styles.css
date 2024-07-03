@@ -16,6 +16,10 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+h3 {
+  margin-top: 0;
+}
+
 .container {
   width: 90%;
   max-width: 1200px;
