@@ -4,22 +4,31 @@ const prefersDark =
   window.matchMedia("(prefers-color-scheme: dark)").matches;
 const storedTheme = localStorage.getItem("theme");
 
-function setTheme(isDark) {
-  document.documentElement.setAttribute(
-    "data-theme",
-    isDark ? "dark" : "light"
-  );
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-  themeToggle.innerHTML = isDark
-    ? '<i class="fas fa-sun"></i>'
-    : '<i class="fas fa-moon"></i>';
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+  themeToggle.innerHTML =
+    theme === "dark"
+      ? '<i class="fas fa-sun"></i>'
+      : '<i class="fas fa-moon"></i>';
 }
 
-setTheme(storedTheme === "dark" || (storedTheme === null && prefersDark));
+// Determine the initial theme
+let initialTheme;
+if (storedTheme) {
+  initialTheme = storedTheme;
+} else if (prefersDark) {
+  initialTheme = "dark";
+} else {
+  initialTheme = "light"; // Default to light theme if no preference is found
+}
 
-themeToggle.addEventListener("click", () =>
-  setTheme(document.documentElement.getAttribute("data-theme") !== "dark")
-);
+setTheme(initialTheme);
+
+themeToggle.addEventListener("click", () => {
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  setTheme(currentTheme === "dark" ? "light" : "dark");
+});
 
 function copyLink() {
   navigator.clipboard
